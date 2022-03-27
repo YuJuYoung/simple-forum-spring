@@ -11,7 +11,6 @@ public class HomeController {
 	
 	@GetMapping("")
 	public String home(Model model) {
-		model.addAttribute("test", "1");
 		return "index";
 	}
 	

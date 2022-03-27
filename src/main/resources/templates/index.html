@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 	<head th:insert="/include/header :: head('게시판')">
-	    <meta charset="UTF-8">
+		<meta charset="UTF-8">
 	</head>
 	<body>
-	    <h1>ㅇㅅㅇ</h1>
-	    <div class="btn-group" role="group" aria-label="Basic example">
-	        <button type="button" class="btn btn-primary">Left</button>
-			<button type="button" class="btn btn-primary">Middle</button>
-			<button type="button" class="btn btn-primary">Right</button>
-		</div>
+	    <div th:replace="/include/navbar :: navbar"></div>
 	</body>
 </html>
