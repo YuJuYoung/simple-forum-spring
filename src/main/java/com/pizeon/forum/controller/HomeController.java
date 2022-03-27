@@ -1,4 +1,4 @@
-package controller;
+package com.pizeon.forum.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ public class HomeController {
 	
 	@GetMapping("")
 	public String home(Model model) {
-		model.addAttribute("hello", "hello");
+		model.addAttribute("test", "1");
 		return "index";
 	}
 	
