@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-	<head th:insert="/include/header :: head('게시판')">
-		<meta charset="UTF-8">
-	</head>
-	<body>
-	    <div th:replace="/include/navbar :: navbar"></div>
-	</body>
+<head th:insert="/include/header :: head('게시판')">
+    <meta charset="UTF-8">
+</head>
+<body>
+	<div th:replace="/include/navbar :: navbar"></div>
+	<div th:replace="/include/footer :: foot"></div>
+</body>
 </html>
