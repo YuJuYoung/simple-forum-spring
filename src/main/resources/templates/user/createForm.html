@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="/include/header :: head('회원가입')"></div>
+    <meta charset="UTF-8">
+    <link th:href="@{/user/createForm}">
+</head>
+<body>
+	<div th:replace="/include/navbar :: navbar"></div>
+	<div class="container" id="form">
+		<form action="/user/create" method="post">
+			<div class="mb-3 row">
+				<label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="staticEmail">
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="inputPassword">
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="staticEmail" class="col-sm-2 col-form-label">Nickname</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="staticEmail">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Sign in</button>
+		</form>
+	</div>
+	<div th:replace="/include/footer :: foot"></div>
+</body>
+</html>
