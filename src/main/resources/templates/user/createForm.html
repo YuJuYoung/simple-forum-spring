@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <div th:replace="/include/header :: head('회원가입')"></div>
+<head th:replace="/include/header :: head('회원가입')">
     <meta charset="UTF-8">
-    <link th:href="@{/user/createForm}">
 </head>
 <body>
 	<div th:replace="/include/navbar :: navbar"></div>
-	<div class="container" id="form">
+	<div class="container" style="padding-top: 20px">
 		<form action="/user/create" method="post">
 			<div class="mb-3 row">
 				<label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
