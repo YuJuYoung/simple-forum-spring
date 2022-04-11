@@ -29,8 +29,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/create")
-	public String create() {
-		return "index";
+	public String create(User user, Model model) {
+		userRepository.save(user);
+		return "redirect:/";
 	}
 	
 }
