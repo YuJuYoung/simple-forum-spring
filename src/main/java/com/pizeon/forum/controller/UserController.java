@@ -1,5 +1,7 @@
 package com.pizeon.forum.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,13 @@ public class UserController {
 	private UserRepository userRepository;
 	
 	@GetMapping("/profile")
-	public String profile(Model model) {
-		User user = userRepository.findById("1");
+	public String profile(HttpSession session, Model model) {
+		String logined_id = (String) session.getAttribute("logined_id");
+		
+		if (logined_id == null) {
+			return "redirect:/";
+		}
+		User user = userRepository.findById(logined_id);
 		model.addAttribute(user);
 		return "user/profile";
 	}
@@ -29,8 +36,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/create")
-	public String create(User user, Model model) {
+	public String create(HttpSession session, User user, Model model) {
 		userRepository.save(user);
+		session.setAttribute("logined_id", user.getId());
 		return "redirect:/";
 	}
 	
