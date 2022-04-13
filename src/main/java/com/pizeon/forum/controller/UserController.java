@@ -20,18 +20,22 @@ public class UserController {
 	
 	@GetMapping("/profile")
 	public String profile(HttpSession session, Model model) {
-		String logined_id = (String) session.getAttribute("logined_id");
+		String logined_id = getLoginedId(session);
 		
 		if (logined_id == null) {
 			return "redirect:/";
 		}
 		User user = userRepository.findById(logined_id);
+		
 		model.addAttribute(user);
+		model.addAttribute("session", session);
+		
 		return "user/profile";
 	}
 	
 	@GetMapping("/create")
-	public String createForm() {
+	public String createForm(HttpSession session, Model model) {
+		model.addAttribute("session", session);
 		return "user/createForm";
 	}
 	
@@ -39,7 +43,12 @@ public class UserController {
 	public String create(HttpSession session, User user, Model model) {
 		userRepository.save(user);
 		session.setAttribute("logined_id", user.getId());
+		
 		return "redirect:/";
+	}
+	
+	private String getLoginedId(HttpSession session) {
+		return (String) session.getAttribute("logined_id");
 	}
 	
 }
