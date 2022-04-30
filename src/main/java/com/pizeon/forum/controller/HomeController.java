@@ -1,7 +1,5 @@
 package com.pizeon.forum.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	
 	@GetMapping("")
-	public String home(HttpSession session, Model model) {
-		model.addAttribute("session", session);
+	public String home(Model model) {
 		return "index";
 	}
 	

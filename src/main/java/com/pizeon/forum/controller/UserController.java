@@ -28,14 +28,11 @@ public class UserController {
 		User user = userRepository.findById(logined_id);
 		
 		model.addAttribute(user);
-		model.addAttribute("session", session);
-		
 		return "user/profile";
 	}
 	
 	@GetMapping("/create")
-	public String createForm(HttpSession session, Model model) {
-		model.addAttribute("session", session);
+	public String createForm(Model model) {
 		return "user/createForm";
 	}
 	
