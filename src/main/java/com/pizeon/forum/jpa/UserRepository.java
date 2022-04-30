@@ -8,4 +8,5 @@ import com.pizeon.forum.data.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 	public User findById(String id);
+	public User findByEmail(String email);
 }

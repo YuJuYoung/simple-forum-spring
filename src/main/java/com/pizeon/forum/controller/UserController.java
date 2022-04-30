@@ -32,16 +32,34 @@ public class UserController {
 	}
 	
 	@GetMapping("/create")
-	public String createForm(Model model) {
+	public String createForm() {
 		return "user/createForm";
 	}
 	
 	@PostMapping("/create")
-	public String create(HttpSession session, User user, Model model) {
+	public String create(HttpSession session, User user) {
 		userRepository.save(user);
 		session.setAttribute("logined_id", user.getId());
 		
 		return "redirect:/";
+	}
+	
+	@GetMapping("/login")
+	public String loginForm() {
+		return "user/loginForm";
+	}
+	
+	@PostMapping("/login")
+	public String login(HttpSession session, String email, String password) {
+		User user = userRepository.findByEmail(email);
+		
+		if (user != null) {
+			if (user.getPassword() == password) {
+				session.setAttribute("logined_id", user.getId());
+				return "redirect:/";
+			}
+		}
+		return "redirect:/user/login";
 	}
 	
 	private String getLoginedId(HttpSession session) {
