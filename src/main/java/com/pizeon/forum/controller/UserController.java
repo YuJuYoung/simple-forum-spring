@@ -54,7 +54,7 @@ public class UserController {
 		User user = userRepository.findByEmail(email);
 		
 		if (user != null) {
-			if (user.getPassword() == password) {
+			if (password.equals(user.getPassword())) {
 				session.setAttribute("logined_id", user.getId());
 				return "redirect:/";
 			}
