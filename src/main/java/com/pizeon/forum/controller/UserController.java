@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.pizeon.forum.data.User;
+import com.pizeon.forum.domain.User;
 import com.pizeon.forum.jpa.UserRepository;
 
 @Controller

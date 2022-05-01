@@ -1,4 +1,4 @@
-package com.pizeon.forum.data;
+package com.pizeon.forum.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
