@@ -31,7 +31,7 @@ public class Post {
 	public String getTitle() {
 		return title;
 	}
-
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -43,5 +43,5 @@ public class Post {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 }
