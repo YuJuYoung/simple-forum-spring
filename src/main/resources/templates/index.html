@@ -6,5 +6,9 @@
 <body>
 	<div th:replace="/include/navbar :: navbar"></div>
 	<div th:replace="/include/footer :: foot"></div>
+	<div th:each="post : ${posts}">
+	    <p th:text="'제목: ' + ${post.title}"></p>
+	    <p th:text="'내용: ' + ${post.description}"></p>
+	</div>
 </body>
 </html>
