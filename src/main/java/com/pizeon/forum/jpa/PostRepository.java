@@ -7,5 +7,5 @@ import com.pizeon.forum.domain.Post;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-
+	public Post findById(String id);
 }
