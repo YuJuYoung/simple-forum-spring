@@ -5,11 +5,14 @@
 </head>
 <body>
 	<div th:replace="/include/navbar :: navbar"></div>
-	<ul th:each="post : ${posts}">
-	    <li>
-	        <a th:href="@{/post/{postId}(postId = ${post.id})}" th:text="${post.title}"></a>
-	    </li>
-	</ul>
+	<div class="container">
+	    <ul th:each="post : ${posts}">
+		    <li>
+		        <a th:href="@{/post/{postId}(postId = ${post.id})}" th:text="${post.title}"></a>
+		    </li>
+		</ul>
+		<a th:if="${session.logined_id}" class="nav-link" href="/post/create">글쓰기</a>
+	</div>
 	<div th:replace="/include/footer :: foot"></div>
 </body>
 </html>
