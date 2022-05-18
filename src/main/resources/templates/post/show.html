@@ -9,6 +9,7 @@
 	<div class="container">
 	    <p th:text="${post.title}"></p>
 	    <p th:text="${post.description}"></p>
+	    <a th:href="@{/post/{postId}/delete(postId = ${post.id})}">삭제</a>
 	</div>
 </body>
 </html>

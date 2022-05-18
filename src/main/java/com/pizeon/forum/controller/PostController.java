@@ -27,7 +27,7 @@ public class PostController {
 	
 	@PostMapping("/create")
 	public String create(HttpSession session, String title, String description) {
-		if (!isLogined(session)) {
+		if (getLoginedId(session) == null) {
 			return "redirect:/user/login";
 		}
 		String userId = (String) session.getAttribute("logined_id");
@@ -43,8 +43,21 @@ public class PostController {
 		return "post/show";
 	}
 	
-	private boolean isLogined(HttpSession session) {
-		return session.getAttribute("logined_id") != null;
+	@GetMapping("/{id}/delete")
+	public String delete(@PathVariable String id, HttpSession session) {
+		String logined_id = getLoginedId(session);
+		Post post = postRepository.findById(id);
+		
+		if (!logined_id.equals(post.getUserId())) {
+			return "redirect:/user/login";
+		}
+		postRepository.deleteById(id);
+		
+		return "redirect:/";
+	}
+	
+	private String getLoginedId(HttpSession session) {
+		return (String) session.getAttribute("logined_id");
 	}
 	
 }
