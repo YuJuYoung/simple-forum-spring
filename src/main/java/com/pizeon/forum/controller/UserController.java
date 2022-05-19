@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -46,6 +47,16 @@ public class UserController {
 			}
 		}
 		return "redirect:/user/login";
+	}
+	
+	@GetMapping("/{id}/delete")
+	public String delete(HttpSession session, @PathVariable String id) {
+		if (!session.getAttribute("logined_id").equals(id)) {
+			return "redirect:/user/login";
+		}
+		userRepository.deleteById(id);
+		
+		return "redirect:/";
 	}
 	
 	@GetMapping("/logout")
