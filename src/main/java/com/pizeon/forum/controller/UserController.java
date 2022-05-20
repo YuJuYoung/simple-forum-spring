@@ -55,6 +55,7 @@ public class UserController {
 			return "redirect:/user/login";
 		}
 		userRepository.deleteById(id);
+		session.setAttribute("logined_id", null);
 		
 		return "redirect:/";
 	}
