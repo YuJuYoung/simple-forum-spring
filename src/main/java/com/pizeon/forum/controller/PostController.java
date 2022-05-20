@@ -56,6 +56,33 @@ public class PostController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/{id}/update")
+	public String updateForm(@PathVariable String id, HttpSession session, Model model) {
+		String logined_id = getLoginedId(session);
+		Post post = postRepository.findById(id);
+		
+		if (!logined_id.equals(post.getUserId())) {
+			return "redirect:/user/login";
+		}
+		model.addAttribute("post", postRepository.findById(id));
+		
+		return "post/updateForm";
+	}
+	
+	@PostMapping("/{id}/update")
+	public String update(@PathVariable String id, HttpSession session, String title, String description) {
+		String logined_id = getLoginedId(session);
+		Post post = postRepository.findById(id);
+		
+		if (!logined_id.equals(post.getUserId())) {
+			return "redirect:/user/login";
+		}
+		post.update(title, description);
+		postRepository.save(post);
+		
+		return "redirect:/post/{id}";
+	}
+	
 	private String getLoginedId(HttpSession session) {
 		return (String) session.getAttribute("logined_id");
 	}

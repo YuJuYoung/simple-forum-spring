@@ -25,6 +25,11 @@ public class Post {
 		this.title = title;
 		this.description = description;
 	}
+	
+	public void update(String title, String description) {
+		this.title = title;
+		this.description = description;
+	}
 
 	public String getId() {
 		return id;

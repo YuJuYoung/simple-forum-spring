@@ -10,6 +10,7 @@
 	    <p th:text="${post.title}"></p>
 	    <p th:text="${post.description}"></p>
 	    <a th:href="@{/post/{postId}/delete(postId = ${post.id})}">삭제</a>
+	    <a th:href="@{/post/{postId}/update(postId = ${post.id})}">수정</a>
 	</div>
 </body>
 </html>
