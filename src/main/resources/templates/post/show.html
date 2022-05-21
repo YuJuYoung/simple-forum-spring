@@ -6,7 +6,7 @@
 <body>
 	<div th:replace="/include/navbar :: navbar"></div>
 	<div th:replace="/include/footer :: foot"></div>
-	<div class="container">
+	<div class="container" style="padding-top: 100px; width: 500px">
 	    <p th:text="${post.title}"></p>
 	    <p th:text="${post.description}"></p>
 	    <a th:href="@{/post/{postId}/delete(postId = ${post.id})}">삭제</a>
