@@ -22,6 +22,13 @@
 					    <a th:if="${session.logined_id}" class="nav-link" href="/user/logout">로그아웃</a>
 					</li>
 					<li class="nav-item">
+					    <a
+					        th:if="${session.logined_id}"
+					        class="nav-link"
+					        th:href="@{/user/{userId}/update(userId = ${session.logined_id})}"
+					    >비밀번호 수정</a>
+					</li>
+					<li class="nav-item">
 					    <a  
 					        th:if="${session.logined_id}"
 					        class="nav-link"

@@ -60,6 +60,32 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/{id}/update")
+	public String updateForm(HttpSession session, @PathVariable String id) {
+		if (!session.getAttribute("logined_id").equals(id)) {
+			return "redirect:/user/login";
+		}
+		return "user/updateForm";
+	}
+	
+	@PostMapping("/{id}/update")
+	public String update(HttpSession session, @PathVariable String id, String lastPwd, String newPwd) {
+		String logined_id = (String) session.getAttribute("logined_id");
+		
+		if (!logined_id.equals(id)) {
+			return "redirect:/user/login";
+		}
+		User user = userRepository.findById(id);
+		
+		if (!user.getPassword().equals(lastPwd)) {
+			return "redirect:/user/login";
+		}
+		user.setPassword(newPwd);
+		userRepository.save(user);
+		
+		return "redirect:/";
+	}
+	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("logined_id");
