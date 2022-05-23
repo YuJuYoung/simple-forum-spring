@@ -60,16 +60,16 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/{id}/update")
-	public String updateForm(HttpSession session, @PathVariable String id) {
+	@GetMapping("/{id}/updatePwd")
+	public String updatePwdForm(HttpSession session, @PathVariable String id) {
 		if (!session.getAttribute("logined_id").equals(id)) {
 			return "redirect:/user/login";
 		}
-		return "user/updateForm";
+		return "user/updatePwdForm";
 	}
 	
-	@PostMapping("/{id}/update")
-	public String update(HttpSession session, @PathVariable String id, String lastPwd, String newPwd) {
+	@PostMapping("/{id}/updatePwd")
+	public String updatePwd(HttpSession session, @PathVariable String id, String lastPwd, String newPwd) {
 		String logined_id = (String) session.getAttribute("logined_id");
 		
 		if (!logined_id.equals(id)) {
@@ -81,6 +81,32 @@ public class UserController {
 			return "redirect:/user/login";
 		}
 		user.setPassword(newPwd);
+		userRepository.save(user);
+		
+		return "redirect:/";
+	}
+	
+	@GetMapping("/{id}/updateNickname")
+	public String updateNicknameForm(HttpSession session, @PathVariable String id) {
+		if (!session.getAttribute("logined_id").equals(id)) {
+			return "redirect:/user/login";
+		}
+		return "user/updateNicknameForm";
+	}
+	
+	@PostMapping("/{id}/updateNickname")
+	public String updateNickname(HttpSession session, @PathVariable String id, String nickname, String password) {
+String logined_id = (String) session.getAttribute("logined_id");
+		
+		if (!logined_id.equals(id)) {
+			return "redirect:/user/login";
+		}
+		User user = userRepository.findById(id);
+		
+		if (!user.getPassword().equals(password)) {
+			return "redirect:/user/login";
+		}
+		user.setNickname(nickname);
 		userRepository.save(user);
 		
 		return "redirect:/";
