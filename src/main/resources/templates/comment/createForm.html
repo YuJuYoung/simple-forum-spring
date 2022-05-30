@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body id="create-form">
+	<form th:action="@{/post/{postId}/comment/create(postId = ${postId})}" method="post">
+		<div class="mb-3 row">
+			<div class="col-sm-10">
+				<textarea id="description" name="description" rows="10" cols="50"></textarea>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary">확인</button>
+	</form>
+</body>
+</html>

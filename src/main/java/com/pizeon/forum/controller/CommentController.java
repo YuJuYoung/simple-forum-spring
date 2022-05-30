@@ -1,26 +1,19 @@
 package com.pizeon.forum.controller;
 
-import javax.servlet.http.HttpSession;
-
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.pizeon.forum.util.HttpSessionUtil;
-import com.pizeon.forum.util.Result;
-
-@RestController
+@Controller
 @RequestMapping("/post/{postId}/comment")
 public class CommentController {
 	
-	private HttpSessionUtil httpSessionUtil;
-	
-	@GetMapping
-	public Result createCommentForm(HttpSession session) {
-		if (httpSessionUtil.getLoginedId(session) == null) {
-			return Result.NO;
-		}
-		return Result.OK;
+	@GetMapping("/createForm")
+	public String createCommentForm(@PathVariable String postId, Model model) {
+		model.addAttribute("postId", postId);
+		return "comment/createForm :: #create-form";
 	}
 	
 }
