@@ -20,6 +20,12 @@ public class Comment {
 		
 	}
 	
+	public Comment(String postId, String userId, String description) {
+		this.postId = postId;
+		this.userId = userId;
+		this.description = description;
+	}
+	
 	public void update(String description) {
 		this.description = description;
 	}
