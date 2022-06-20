@@ -11,5 +11,6 @@ import com.pizeon.forum.domain.Comment;
 public interface CommentRepository extends JpaRepository<Comment, Long>{
 	
 	public List<Comment> findByPostId(String postId);
+	public Comment findById(String id);
 	
 }

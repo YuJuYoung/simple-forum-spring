@@ -13,50 +13,20 @@
 	    <a th:href="@{/post/{postId}/update(postId = ${post.id})}">수정</a>
 	    <button th:onclick="onClickCreateCommentBtn([[${post.id}]], [[${session.logined_id}]])">댓글 달기</button>
 	    <form id="create-comment"></form>
-	    <ul th:each="comment : ${comments}">
-		    <li>
-		        <div th:insert="/comment/show :: #show-form"></div>
+	    <ul id="comment-list">
+		    <li th:each="comment : ${comments}">
+		        <div th:insert="/comment/show :: .show-form"></div>
 		    </li>
 		</ul>
 	</div>
 	
 	<script type="text/javascript" src="/js/post/show.js"></script>
-	<script type="text/javascipt" src="/js/comment/createForm.js"></script>
 	<script th:inline="javascript">
 		document.getElementById("create-comment").addEventListener("submit", e => {
-			e.preventDefault();
-			
 			var postId = /*[[${post.id}]]*/ "";
 			var logined_id = /*[[${session.logined_id}]]*/ "";
 			
-			const onClickCreateBtn = (postId, logined_id) => {
-				e.preventDefault();
-				
-				if (!logined_id) {
-					alert("로그인 필요");
-				} else {
-					fetch("/post/" + postId + "/comment/create", {
-						method: "post",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify({
-							userId: logined_id,
-							description: e.target.description.value
-						})
-					}).then(res => {
-						res.json().then(json => {
-							if (json.valid) {
-								alert("성공");
-							} else {
-								alert("오류 발생");
-							}
-						})
-					})
-				}
-			}
-			
-			onClickCreateBtn(postId, logined_id);
+			onClickCreateBtn(e, postId, logined_id);
 		})
 	</script>
 	<div th:replace="/include/footer :: foot"></div>

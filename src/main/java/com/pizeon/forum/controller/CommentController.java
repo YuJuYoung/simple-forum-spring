@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pizeon.forum.domain.Comment;
 import com.pizeon.forum.jpa.CommentRepository;
 import com.pizeon.forum.util.HttpSessionUtil;
-import com.pizeon.forum.util.Result;
 
 @Controller
 @RequestMapping("/post/{postId}/comment")
@@ -33,19 +31,20 @@ public class CommentController {
 	}
 	
 	@PostMapping("/create")
-	public @ResponseBody Result create(@PathVariable String postId, HttpSession session, @RequestBody HashMap<String, Object> body) {
+	public String create(@PathVariable String postId, HttpSession session, @RequestBody HashMap<String, Object> body, Model model) {
 		String logined_id = HttpSessionUtil.getLoginedId(session);
 		String userId = (String) body.get("userId");
 		
 		if (logined_id == null || !logined_id.equals(userId)) {
-			return Result.FAIL;
+			return null;
 		}
 		
 		String description = (String) body.get("description");
 		Comment comment = new Comment(postId, logined_id, description);
 		commentRepository.save(comment);
 		
-		return Result.SUCCESS;
+		model.addAttribute("comment", commentRepository.findById(comment.getId()));
+		return "comment/show :: .show-form";
 	}
 	
 }

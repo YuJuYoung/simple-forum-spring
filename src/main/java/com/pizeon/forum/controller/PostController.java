@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.pizeon.forum.domain.Post;
 import com.pizeon.forum.jpa.CommentRepository;
 import com.pizeon.forum.jpa.PostRepository;
+import com.pizeon.forum.util.HttpSessionUtil;
 
 @Controller
 @RequestMapping("/post")
@@ -31,7 +32,7 @@ public class PostController {
 	
 	@PostMapping("/create")
 	public String create(HttpSession session, String title, String description) {
-		if (getLoginedId(session) == null) {
+		if (HttpSessionUtil.getLoginedId(session) == null) {
 			return "redirect:/user/login";
 		}
 		String userId = (String) session.getAttribute("logined_id");
@@ -50,7 +51,7 @@ public class PostController {
 	
 	@GetMapping("/{id}/delete")
 	public String delete(@PathVariable String id, HttpSession session) {
-		String logined_id = getLoginedId(session);
+		String logined_id = HttpSessionUtil.getLoginedId(session);
 		Post post = postRepository.findById(id);
 		
 		if (!logined_id.equals(post.getUserId())) {
@@ -63,7 +64,7 @@ public class PostController {
 	
 	@GetMapping("/{id}/update")
 	public String updateForm(@PathVariable String id, HttpSession session, Model model) {
-		String logined_id = getLoginedId(session);
+		String logined_id = HttpSessionUtil.getLoginedId(session);
 		Post post = postRepository.findById(id);
 		
 		if (!logined_id.equals(post.getUserId())) {
@@ -76,7 +77,7 @@ public class PostController {
 	
 	@PostMapping("/{id}/update")
 	public String update(@PathVariable String id, HttpSession session, String title, String description) {
-		String logined_id = getLoginedId(session);
+		String logined_id = HttpSessionUtil.getLoginedId(session);
 		Post post = postRepository.findById(id);
 		
 		if (!logined_id.equals(post.getUserId())) {
@@ -86,10 +87,6 @@ public class PostController {
 		postRepository.save(post);
 		
 		return "redirect:/post/{id}";
-	}
-	
-	private String getLoginedId(HttpSession session) {
-		return (String) session.getAttribute("logined_id");
 	}
 	
 }

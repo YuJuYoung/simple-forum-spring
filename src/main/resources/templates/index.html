@@ -6,8 +6,8 @@
 <body>
 	<div th:replace="/include/navbar :: navbar"></div>
 	<div class="container">
-	    <ul th:each="post : ${posts}">
-		    <li>
+	    <ul>
+		    <li th:each="post : ${posts}">
 		        <a th:href="@{/post/{postId}(postId = ${post.id})}" th:text="${post.title}"></a>
 		    </li>
 		</ul>
