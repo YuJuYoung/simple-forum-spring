@@ -13,6 +13,11 @@
 	    <a th:href="@{/post/{postId}/update(postId = ${post.id})}">수정</a>
 	    <button th:onclick="onClickCreateCommentBtn([[${post.id}]], [[${session.logined_id}]])">댓글 달기</button>
 	    <form id="create-comment"></form>
+	    <ul th:each="comment : ${comments}">
+		    <li>
+		        <div th:insert="/comment/show :: #show-form"></div>
+		    </li>
+		</ul>
 	</div>
 	
 	<script type="text/javascript" src="/js/post/show.js"></script>

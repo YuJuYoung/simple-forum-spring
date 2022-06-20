@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pizeon.forum.domain.Post;
+import com.pizeon.forum.jpa.CommentRepository;
 import com.pizeon.forum.jpa.PostRepository;
 
 @Controller
@@ -19,6 +20,9 @@ public class PostController {
 	
 	@Autowired
 	PostRepository postRepository;
+	
+	@Autowired
+	CommentRepository commentRepository;
 	
 	@GetMapping("/create")
 	public String createForm() {
@@ -40,6 +44,7 @@ public class PostController {
 	@GetMapping("/{id}")
 	public String show(@PathVariable String id, Model model) {
 		model.addAttribute("post", postRepository.findById(id));
+		model.addAttribute("comments", commentRepository.findByPostId(id));
 		return "post/show";
 	}
 	
