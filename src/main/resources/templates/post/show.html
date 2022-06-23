@@ -14,9 +14,7 @@
 	    <button th:onclick="onClickCreateCommentBtn([[${post.id}]], [[${session.logined_id}]])">댓글 달기</button>
 	    <form id="create-comment"></form>
 	    <ul id="comment-list">
-		    <li th:each="comment : ${comments}">
-		        <div th:insert="/comment/show :: .show-form"></div>
-		    </li>
+		    <li th:each="comment : ${comments}" th:insert="/comment/show :: .show-form"></li>
 		</ul>
 	</div>
 	

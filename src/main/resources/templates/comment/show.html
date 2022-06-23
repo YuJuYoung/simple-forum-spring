@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
 </head>
 <body>
-	<div class="show-form">
+	<div th:id="'comment-' + ${comment.id}" class="show-form">
 	    <p th:text="${comment.description}"></p>
+	    <button
+	        th:if="${session.logined_id} == ${comment.userId}"
+	        th:onclick="onClickDeleteCommentBtn([[${comment.postId}]], [[${comment.id}]], [[${session.logined_id}]])"
+	    >삭제</button>
 	</div>
 </body>
 </html>
