@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pizeon.forum.domain.User;
 import com.pizeon.forum.jpa.UserRepository;
+import com.pizeon.forum.util.HttpSessionUtil;
 
 @Controller
 @RequestMapping("/user")
@@ -26,7 +27,7 @@ public class UserController {
 	@PostMapping("/create")
 	public String create(HttpSession session, User user) {
 		userRepository.save(user);
-		session.setAttribute("logined_id", user.getId());
+		HttpSessionUtil.setLoginedId(session, user.getId());
 		
 		return "redirect:/";
 	}
@@ -42,7 +43,7 @@ public class UserController {
 		
 		if (user != null) {
 			if (password.equals(user.getPassword())) {
-				session.setAttribute("logined_id", user.getId());
+				HttpSessionUtil.setLoginedId(session, user.getId());
 				return "redirect:/";
 			}
 		}
@@ -51,18 +52,18 @@ public class UserController {
 	
 	@GetMapping("/{id}/delete")
 	public String delete(HttpSession session, @PathVariable String id) {
-		if (!session.getAttribute("logined_id").equals(id)) {
+		if (!HttpSessionUtil.getLoginedId(session).equals(id)) {
 			return "redirect:/user/login";
 		}
 		userRepository.deleteById(id);
-		session.setAttribute("logined_id", null);
+		HttpSessionUtil.setLoginedId(session, null);
 		
 		return "redirect:/";
 	}
 	
 	@GetMapping("/{id}/updatePwd")
 	public String updatePwdForm(HttpSession session, @PathVariable String id) {
-		if (!session.getAttribute("logined_id").equals(id)) {
+		if (!HttpSessionUtil.getLoginedId(session).equals(id)) {
 			return "redirect:/user/login";
 		}
 		return "user/updatePwdForm";
@@ -70,7 +71,7 @@ public class UserController {
 	
 	@PostMapping("/{id}/updatePwd")
 	public String updatePwd(HttpSession session, @PathVariable String id, String lastPwd, String newPwd) {
-		String logined_id = (String) session.getAttribute("logined_id");
+		String logined_id = HttpSessionUtil.getLoginedId(session);
 		
 		if (!logined_id.equals(id)) {
 			return "redirect:/user/login";
@@ -88,7 +89,7 @@ public class UserController {
 	
 	@GetMapping("/{id}/updateNickname")
 	public String updateNicknameForm(HttpSession session, @PathVariable String id) {
-		if (!session.getAttribute("logined_id").equals(id)) {
+		if (!HttpSessionUtil.getLoginedId(session).equals(id)) {
 			return "redirect:/user/login";
 		}
 		return "user/updateNicknameForm";
@@ -96,7 +97,7 @@ public class UserController {
 	
 	@PostMapping("/{id}/updateNickname")
 	public String updateNickname(HttpSession session, @PathVariable String id, String nickname, String password) {
-String logined_id = (String) session.getAttribute("logined_id");
+        String logined_id = HttpSessionUtil.getLoginedId(session);
 		
 		if (!logined_id.equals(id)) {
 			return "redirect:/user/login";
@@ -114,7 +115,7 @@ String logined_id = (String) session.getAttribute("logined_id");
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("logined_id");
+		HttpSessionUtil.setLoginedId(session, null);
 		return "redirect:/";
 	}
 	
