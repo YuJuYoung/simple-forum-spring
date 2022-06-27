@@ -5,13 +5,16 @@
 </head>
 <body>
 	<div th:replace="/include/navbar :: navbar"></div>
-	<div class="container">
-	    <ul>
-		    <li th:each="post : ${posts}">
+	<div class="container" style="padding-top: 20px">
+	    <ul class="list-group list-group-flush">
+		    <li th:each="post : ${posts}" class="list-group-item">
 		        <a th:href="@{/post/{postId}(postId = ${post.id})}" th:text="${post.title}"></a>
 		    </li>
 		</ul>
-		<a th:if="${session.logined_id}" class="nav-link" href="/post/create">글쓰기</a>
+		<a 
+		    class="btn btn-primary disabled" tabindex="-1" role="button" aria-disabled="true"
+		    th:if="${session.logined_id}" href="/post/create"
+		>글쓰기</a>
 	</div>
 	<div th:replace="/include/footer :: foot"></div>
 </body>
