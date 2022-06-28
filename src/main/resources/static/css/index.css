@@ -1,0 +1,14 @@
+.container {
+	padding-top: 100px;
+	width: 700px;
+}
+
+.post-title {
+	color: black;
+	text-decoration: none;
+}
+
+.comment-count {
+	display: inline;
+	float: right;
+}

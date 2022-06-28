@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="/include/header :: head('게시판')">
+<head th:insert="/include/header :: head('게시판')"></head>
+<head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/index.css}" rel="stylesheet">
 </head>
 <body>
 	<div th:replace="/include/navbar :: navbar"></div>
-	<div class="container" style="padding-top: 20px">
+	<div class="container">
 	    <ul class="list-group list-group-flush">
 		    <li th:each="post : ${posts}" class="list-group-item">
-		        <a th:href="@{/post/{postId}(postId = ${post.id})}" th:text="${post.title}"></a>
+		        <a class="post-title" th:href="@{/post/{postId}(postId = ${post.id})}" th:text="${post.title}"></a>
+		        <div class="comment-count" th:insert="/icon/commentCount :: count(1)"></div>
 		    </li>
 		</ul>
-		<a 
-		    class="btn btn-primary disabled" tabindex="-1" role="button" aria-disabled="true"
+		<a
+		    type="button" class="btn btn-outline-primary"
 		    th:if="${session.logined_id}" href="/post/create"
 		>글쓰기</a>
 	</div>
