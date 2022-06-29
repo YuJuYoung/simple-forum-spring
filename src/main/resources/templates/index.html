@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div th:replace="/include/navbar :: navbar"></div>
-	<div class="container">
+	<div id="post-list" class="container">
 	    <ul class="list-group list-group-flush">
 		    <li th:each="post : ${posts}" class="list-group-item">
 		        <a class="post-title" th:href="@{/post/{postId}(postId = ${post.id})}" th:text="${post.title}"></a>
@@ -15,7 +15,7 @@
 		    </li>
 		</ul>
 		<a
-		    type="button" class="btn btn-outline-primary"
+		    id="create-btn" type="button" class="btn btn-outline-primary"
 		    th:if="${session.logined_id}" href="/post/create"
 		>글쓰기</a>
 	</div>

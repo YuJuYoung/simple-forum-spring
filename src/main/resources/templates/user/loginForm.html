@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="/include/header :: head('로그인')">
+<head th:insert="/include/header :: head('로그인')"></head>
+<head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/user/loginForm.css}" rel="stylesheet">
 </head>
 <body>
 	<div th:replace="/include/navbar :: navbar"></div>
@@ -19,9 +21,9 @@
 					<input type="password" class="form-control" id="password" name="password">
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">로그인</button>
+			<button id="login-btn" type="submit" class="btn btn-outline-primary">로그인</button>
 		</form>
-		<a th:href="@{/user/create}">회원가입</a>
+		<a th:href="@{/user/create}" id="create-btn" type="button" class="btn btn-outline-primary">회원가입</a>
 	</div>
 	<div th:replace="/include/footer :: foot"></div>
 </body>

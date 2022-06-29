@@ -1,6 +1,6 @@
-.container {
+#post-list {
 	padding-top: 100px;
-	width: 700px;
+	width: 500px;
 }
 
 .post-title {
@@ -10,5 +10,9 @@
 
 .comment-count {
 	display: inline;
+	float: right;
+}
+
+#create-btn {
 	float: right;
 }

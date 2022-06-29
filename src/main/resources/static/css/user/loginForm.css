@@ -1,0 +1,9 @@
+#create-btn {
+	display: inline;
+	float: right;
+	margin-right: 10px;
+}
+
+#login-btn {
+	float: right;
+}
