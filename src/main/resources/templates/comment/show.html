@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 </head>
 <body>
-	<div th:id="'comment-' + ${comment.id}" class="show-form">
+	<div class="show-form" th:id="'comment-' + ${comment.id}">
 	    <p th:text="${comment.description}"></p>
 	    <button
 	        th:if="${session.logined_id} == ${comment.userId}"

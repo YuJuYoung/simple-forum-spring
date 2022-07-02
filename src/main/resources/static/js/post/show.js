@@ -36,6 +36,7 @@ const onClickCreateBtn = (e, postId, logined_id) => {
 						var newComment = document.createElement('li');
 						var commentList = document.getElementById("comment-list");
 						
+						newComment.setAttribute("class", "list-group-item");
 						newComment.innerHTML = text;
 						commentList.append(newComment);
 					} else {

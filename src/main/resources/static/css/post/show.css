@@ -1,0 +1,13 @@
+#post {
+	padding-top: 100px;
+	width: 500px;
+}
+
+#update-post-btn {
+	float: right;
+}
+
+#delete-post-btn {
+	float: right;
+	margin-left: 10px;
+}
