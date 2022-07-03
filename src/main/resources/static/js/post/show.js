@@ -1,15 +1,3 @@
-const onClickCreateCommentBtn = (postId, logined_id) => {
-	if (!logined_id) {
-		alert("로그인 필요");
-	} else {
-		fetch('/post/' + postId + '/comment/createForm').then(res => {
-			res.text().then(text => {
-				document.getElementById("create-comment").innerHTML = text;
-			})
-	    })
-	}
-}
-
 const onClickCreateBtn = (e, postId, logined_id) => {
 	e.preventDefault();
 				
@@ -44,8 +32,6 @@ const onClickCreateBtn = (e, postId, logined_id) => {
 					}
 				})
 			})
-			
-			document.getElementById("create-form").remove();
 		}
 	}
 }

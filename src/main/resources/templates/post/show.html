@@ -26,17 +26,16 @@
 	    </div>
 	    <div class="row">
 	        <div class="col">
-		        <button th:onclick="onClickCreateCommentBtn([[${post.id}]], [[${session.logined_id}]])">댓글 달기</button>
-				<form id="create-comment"></form>
 				<ul id="comment-list" class="list-group list-group-flush">
 					<li class="list-group-item" th:each="comment : ${comments}" th:insert="/comment/show :: .show-form"></li>
 			    </ul>
+			    <div id="create-comment" th:insert="/comment/createForm :: #create-form"></div>
 	        </div>
 	    </div>
 	</div>
 	<script type="text/javascript" src="/js/post/show.js"></script>
 	<script th:inline="javascript">
-		document.getElementById("create-comment").addEventListener("submit", e => {
+		document.getElementById("create-form").addEventListener("submit", e => {
 			var postId = /*[[${post.id}]]*/ "";
 			var logined_id = /*[[${session.logined_id}]]*/ "";
 			
