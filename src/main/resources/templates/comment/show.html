@@ -5,7 +5,7 @@
 </head>
 <body>
 	<div class="show-form" th:id="'comment-' + ${comment.id}">
-	    <p class="comment-desc" th:text="${comment.description}"></p>
+	    <p th:text="${comment.description}"></p>
 	    <button
 	        class="comment-delete-btn"
 	        th:if="${session.logined_id} == ${comment.userId}"
