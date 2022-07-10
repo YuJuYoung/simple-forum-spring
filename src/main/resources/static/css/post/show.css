@@ -12,7 +12,6 @@
 	margin-left: 10px;
 }
 
-.comment-delete-btn {
-	display: inline;
+.comment-button {
 	float: right;
 }
