@@ -6,15 +6,25 @@
 <body>
 	<div class="show-form" th:id="'comment-' + ${comment.id}">
 	    <p th:text="${comment.description}"></p>
-	    <div class="comment-button" th:if="${session.logined_id} == ${comment.userId}">
-	    	<button
-		        class="comment-update-btn"
-		        th:onclick=""
-		    >수정</button>
-	        <button
-		        class="comment-delete-btn"
-		        th:onclick="onClickDeleteCommentBtn([[${comment.postId}]], [[${comment.id}]], [[${session.logined_id}]])"
-		    >삭제</button>
+	    <div id="btn-or-form">
+	        <div
+		        id="comment-button"
+		        class="btn-group btn-group-sm"
+		        role="group"
+		        aria-label="Basic outlined example"
+		        th:if="${session.logined_id} == ${comment.userId}"
+		    >
+		        <button
+				    type="button"
+				    class="btn btn-outline-primary"
+				    th:onclick="onClickUpdateCommentBtn([[${comment.postId}]], [[${comment.id}]], [[${session.logined_id}]])"
+				>수정</button>
+				<button
+			        type="button"
+				    class="btn btn-outline-primary"
+			        th:onclick="deleteComment([[${comment.postId}]], [[${comment.id}]], [[${session.logined_id}]])"
+			    >삭제</button>
+			</div>
 	    </div>
 	</div>
 </body>

@@ -29,7 +29,7 @@ public class CommentController {
 	@GetMapping("/createForm")
 	public String createCommentForm(@PathVariable String postId, Model model) {
 		model.addAttribute("postId", postId);
-		return "comment/createForm :: #create-form";
+		return "comment/createForm :: #create-comment-form";
 	}
 	
 	@PostMapping("/create")
@@ -60,6 +60,26 @@ public class CommentController {
 		
 		commentRepository.deleteById((String) body.get("commentId"));
 		return Result.SUCCESS;
+	}
+	
+	@PostMapping("/updateForm")
+	public String updateForm(@PathVariable String postId, HttpSession session, Model model, @RequestBody HashMap<String, Object> body) {
+		String logined_id = HttpSessionUtil.getLoginedId(session);
+		String userId = (String) body.get("userId");
+		
+		if (logined_id == null || !logined_id.equals(userId)) {
+			return null;
+		}
+		
+		String commentId = (String) body.get("commentId");
+		Comment comment = commentRepository.findById(commentId);
+		
+		if (!comment.getPostId().equals(postId) || !comment.getId().equals(userId)) {
+			return null;
+		}
+		
+		model.addAttribute("commentId", commentId);
+		return "comment/updateForm :: #update-comment-form";
 	}
 	
 }

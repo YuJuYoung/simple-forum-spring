@@ -12,6 +12,15 @@
 	margin-left: 10px;
 }
 
-.comment-button {
+#comment-button {
+	float: right;
+}
+
+#create-comment-desc {
+	width: 300px;
+	height: 150px;
+}
+
+#create-comment-form {
 	float: right;
 }

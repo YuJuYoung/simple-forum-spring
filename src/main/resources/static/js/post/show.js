@@ -36,7 +36,30 @@ const onClickCreateBtn = (e, postId, logined_id) => {
 	}
 }
 
-const onClickDeleteCommentBtn = (postId, commentId, logined_id) => {
+const onClickUpdateCommentBtn = (postId, commentId, loginedId) => {
+	fetch("/post/" + postId + "/comment/updateForm", {
+		method: "post",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({
+			userId: loginedId,
+			commentId: commentId
+		})
+	}).then(res => {
+		res.text().then(text => {
+			var comment = document.getElementById("comment-" + commentId);
+			
+			if (text) {
+				comment.append(text);
+			} else {
+				alert("오류 발생");
+			}
+		})
+	})
+}
+
+const deleteComment = (postId, commentId, logined_id) => {
 	if (!logined_id) {
 		alert("로그인 필요");
 	} else {
