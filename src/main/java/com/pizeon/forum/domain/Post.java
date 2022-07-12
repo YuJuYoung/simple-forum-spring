@@ -15,6 +15,7 @@ public class Post {
 	private String userId;
 	private String title;
 	private String description;
+	private String commentCount;
 	
 	public Post() {
 		
@@ -24,6 +25,7 @@ public class Post {
 		this.userId = userId;
 		this.title = title;
 		this.description = description;
+		commentCount = "0";
 	}
 	
 	public void update(String title, String description) {
@@ -53,6 +55,22 @@ public class Post {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getCommentCount() {
+		return commentCount;
+	}
+	
+	public void setCommentCount(String commentCount) {
+		this.commentCount = commentCount;
+	}
+	
+	public void addComment() {
+		commentCount = Integer.toString(Integer.parseInt(commentCount) + 1);
+	}
+	
+	public void removeComment() {
+		commentCount = Integer.toString(Integer.parseInt(commentCount) - 1);
 	}
 
 }

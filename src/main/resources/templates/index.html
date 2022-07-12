@@ -11,7 +11,7 @@
 	    <ul class="list-group list-group-flush">
 		    <li th:each="post : ${posts}" class="list-group-item">
 		        <a class="post-title" th:href="@{/post/{postId}(postId = ${post.id})}" th:text="${post.title}"></a>
-		        <div class="comment-count" th:insert="/icon/commentCount :: count(1)"></div>
+		        <div class="comment-count" th:insert="/icon/commentCount :: count(${post.commentCount})"></div>
 		    </li>
 		</ul>
 		<a
