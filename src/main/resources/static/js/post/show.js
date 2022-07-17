@@ -20,7 +20,7 @@ const onClickCreateBtn = (e, postId, logined_id) => {
 				})
 			}).then(res => {
 				res.text().then(text => {
-					if (text != null) {
+					if (text) {
 						var newComment = document.createElement('li');
 						var commentList = document.getElementById("comment-list");
 						

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pizeon.forum.domain.Comment;
+import com.pizeon.forum.domain.Post;
 import com.pizeon.forum.jpa.CommentRepository;
+import com.pizeon.forum.jpa.PostRepository;
 import com.pizeon.forum.util.HttpSessionUtil;
 import com.pizeon.forum.util.Result;
 
@@ -25,6 +27,9 @@ public class CommentController {
 	
 	@Autowired
 	private CommentRepository commentRepository;
+	
+	@Autowired
+	private PostRepository postRepository;
 	
 	@GetMapping("/createForm")
 	public String createCommentForm(@PathVariable String postId, Model model) {
@@ -42,8 +47,13 @@ public class CommentController {
 		}
 		
 		String description = (String) body.get("description");
+		
 		Comment comment = new Comment(postId, logined_id, description);
 		commentRepository.save(comment);
+		
+		Post post = postRepository.findById(postId);
+		post.addComment();
+		postRepository.save(post);
 		
 		model.addAttribute("comment", commentRepository.findById(comment.getId()));
 		return "comment/show :: .show-form";
@@ -57,6 +67,10 @@ public class CommentController {
 		if (logined_id == null || !logined_id.equals(userId)) {
 			return Result.FAIL;
 		}
+		
+		Post post = postRepository.findById(postId);
+		post.removeComment();
+		postRepository.save(post);
 		
 		commentRepository.deleteById((String) body.get("commentId"));
 		return Result.SUCCESS;
