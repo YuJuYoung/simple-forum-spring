@@ -48,10 +48,14 @@ const onClickUpdateCommentBtn = (postId, commentId, loginedId) => {
 		})
 	}).then(res => {
 		res.text().then(text => {
+			var newTag = document.createElement("div");
 			var comment = document.getElementById("comment-" + commentId);
 			
+			newTag.setAttribute("id", "update-comment-" + commentId);
+			newTag.innerHTML = text;
+			
 			if (text) {
-				comment.append(text);
+				comment.append(newTag);
 			} else {
 				alert("오류 발생");
 			}

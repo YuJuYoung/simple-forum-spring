@@ -88,7 +88,7 @@ public class CommentController {
 		String commentId = (String) body.get("commentId");
 		Comment comment = commentRepository.findById(commentId);
 		
-		if (!comment.getPostId().equals(postId) || !comment.getId().equals(userId)) {
+		if (!comment.getPostId().equals(postId) || !comment.getUserId().equals(userId)) {
 			return null;
 		}
 		
