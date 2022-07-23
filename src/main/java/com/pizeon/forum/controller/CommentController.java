@@ -93,7 +93,7 @@ public class CommentController {
 		}
 		
 		model.addAttribute("commentId", commentId);
-		return "comment/updateForm :: #update-comment-form";
+		return "comment/updateForm :: .update-comment-form";
 	}
 	
 }

@@ -51,6 +51,7 @@ const onClickUpdateCommentBtn = (postId, commentId, loginedId) => {
 			var newTag = document.createElement("div");
 			var comment = document.getElementById("comment-" + commentId);
 			
+			newTag.setAttribute("class", "update-comment");
 			newTag.setAttribute("id", "update-comment-" + commentId);
 			newTag.innerHTML = text;
 			
