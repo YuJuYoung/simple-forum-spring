@@ -64,6 +64,33 @@ const onClickUpdateCommentBtn = (postId, commentId, loginedId) => {
 	})
 }
 
+function updateComment(postId, commentId, loginedId) {
+	var desc = document.getElementById("update-comment-desc-" + commentId).value;
+	
+	fetch("/post/" + postId + "/comment/update", {
+		method: "post",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({
+			commentId: commentId,
+			userId: loginedId,
+			desc: desc
+		})
+	}).then(res => {
+		res.text().then(text => {
+			if (text) {
+				document.getElementById("comment-" + commentId + "-desc").innerText = text;
+				document.getElementById("update-comment-" + commentId).remove();
+			} else {
+				alert("오류 발생");
+			}
+		})
+	})
+	
+	return false;
+}
+
 const deleteComment = (postId, commentId, logined_id) => {
 	if (!logined_id) {
 		alert("로그인 필요");

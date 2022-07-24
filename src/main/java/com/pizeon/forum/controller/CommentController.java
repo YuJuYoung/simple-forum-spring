@@ -92,8 +92,30 @@ public class CommentController {
 			return null;
 		}
 		
-		model.addAttribute("commentId", commentId);
+		model.addAttribute("comment", comment);
 		return "comment/updateForm :: .update-comment-form";
+	}
+	
+	@PostMapping("/update")
+	public @ResponseBody String update(@PathVariable String postId, HttpSession session, @RequestBody HashMap<String, Object> body) {
+		String logined_id = HttpSessionUtil.getLoginedId(session);
+		String userId = (String) body.get("userId");
+		
+		if (logined_id == null || !logined_id.equals(userId)) {
+			return null;
+		}
+		
+		String commentId = (String) body.get("commentId");
+		Comment comment = commentRepository.findById(commentId);
+		
+		if (!comment.getPostId().equals(postId) || !comment.getUserId().equals(userId)) {
+			return null;
+		}
+		
+		comment.setDescription((String) body.get("desc"));
+		commentRepository.save(comment);
+		
+		return comment.getDescription();
 	}
 	
 }

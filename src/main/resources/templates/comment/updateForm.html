@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
 </head>
 <body>
-	<form class="update-comment-form">
-		<textarea class="update-comment-desc" name="description"></textarea>
+	<form
+	    action="#"
+	    class="update-comment-form"
+	    th:onsubmit="return updateComment([[${comment.postId}]], [[${comment.id}]], [[${session.logined_id}]])"
+	>
+		<textarea
+		    class="update-comment-desc"
+		    th:id="'update-comment-desc-' + ${comment.id}"
+		    name="description"
+		></textarea>
 		<br/>
 		<button
 		    style="float: right"

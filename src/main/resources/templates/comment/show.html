@@ -5,7 +5,7 @@
 </head>
 <body>
 	<div class="show-form" th:id="'comment-' + ${comment.id}">
-	    <p th:text="${comment.description}"></p>
+	    <p th:id="'comment-' + ${comment.id} + '-desc'" th:text="${comment.description}"></p>
 	    <div id="btn-or-form">
 	        <div
 		        id="comment-button"
