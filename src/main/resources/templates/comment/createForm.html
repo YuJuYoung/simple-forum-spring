@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
 </head>
 <body>
-	<form id="create-comment-form">
+	<form
+	    th:fragment="createForm(postId)"
+	    action="#"
+	    id="create-comment-form"
+	    th:onsubmit="return createComment([[${postId}]], [[${session.logined_id}]])"
+	>
 		<textarea id="create-comment-desc" name="description"></textarea>
 		<br/>
 		<button

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,12 +29,6 @@ public class CommentController {
 	
 	@Autowired
 	private PostRepository postRepository;
-	
-	@GetMapping("/createForm")
-	public String createCommentForm(@PathVariable String postId, Model model) {
-		model.addAttribute("postId", postId);
-		return "comment/createForm :: #create-comment-form";
-	}
 	
 	@PostMapping("/create")
 	public String create(@PathVariable String postId, HttpSession session, @RequestBody HashMap<String, Object> body, Model model) {
