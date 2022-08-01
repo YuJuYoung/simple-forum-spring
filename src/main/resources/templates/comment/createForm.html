@@ -8,7 +8,7 @@
 	    th:fragment="createForm(postId)"
 	    action="#"
 	    id="create-comment-form"
-	    th:onsubmit="return createComment([[${postId}]], [[${session.logined_id}]])"
+	    th:onsubmit="return createComment([[${postId}]], [[${session.logined_id}]]);"
 	>
 		<textarea id="create-comment-desc" name="description"></textarea>
 		<br/>
